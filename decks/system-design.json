@@ -1,0 +1,317 @@
+{
+ "id": "system-design",
+ "name": "System design: caching, hashing, databases, Kafka",
+ "description": "How the pieces of backend systems work and trade off.",
+ "cards": [
+  {
+   "front": "Cache-aside (lazy loading): who loads data into the cache?",
+   "back": "The application: on a miss it reads the database, then writes the result into the cache.",
+   "kind": "basic"
+  },
+  {
+   "front": "Write-through vs. write-back caching",
+   "back": "Write-through writes the cache and the database together (safe, slower writes). Write-back writes the cache first and flushes to the database later (fast, can lose data on a crash).",
+   "kind": "basic"
+  },
+  {
+   "front": "What is a cache stampede (thundering herd)?",
+   "back": "A hot key expires and many requests miss at once, all hitting the database together.",
+   "kind": "basic"
+  },
+  {
+   "front": "Three ways to prevent a cache stampede",
+   "back": "Request coalescing (one request recomputes, others wait), a lock or lease per key, and early probabilistic refresh / jittered TTLs.",
+   "kind": "basic"
+  },
+  {
+   "front": "Why add random jitter to cache TTLs?",
+   "back": "So keys written together don't all expire together and cause a burst of misses.",
+   "kind": "basic"
+  },
+  {
+   "front": "LRU vs. LFU eviction",
+   "back": "LRU evicts what was used longest ago; LFU evicts what is used least often. LFU keeps steady favorites; LRU adapts faster to new patterns.",
+   "kind": "basic"
+  },
+  {
+   "front": "Which eviction policy fits a scan-heavy workload that would flush an LRU cache?",
+   "back": "A scan-resistant policy such as LFU, ARC, or segmented LRU (or 2Q / W-TinyLFU).",
+   "kind": "choice",
+   "choices": [
+    "Plain LRU",
+    "FIFO",
+    "Random"
+   ]
+  },
+  {
+   "front": "What does a CDN cache, and where?",
+   "back": "Static (and some dynamic) responses at edge servers near users, cutting latency and origin load.",
+   "kind": "basic"
+  },
+  {
+   "front": "What is negative caching?",
+   "back": "Caching 'not found' results so repeated lookups for missing keys don't hit the database.",
+   "kind": "basic"
+  },
+  {
+   "front": "Hardest part of caching, per the classic joke?",
+   "back": "Cache invalidation (and naming things, and off-by-one errors).",
+   "kind": "basic"
+  },
+  {
+   "front": "Redis vs. Memcached: which supports data structures, persistence and replication?",
+   "back": "Redis",
+   "kind": "choice",
+   "choices": [
+    "Memcached",
+    "Both equally",
+    "Neither"
+   ]
+  },
+  {
+   "front": "Problem with hash(key) mod N for sharding",
+   "back": "When N changes, almost every key moves to a different server.",
+   "kind": "basic"
+  },
+  {
+   "front": "Consistent hashing in one sentence",
+   "back": "Servers and keys sit on a hash ring; each key goes to the next server clockwise, so adding or removing a server moves only about 1/N of keys.",
+   "kind": "basic"
+  },
+  {
+   "front": "Why use virtual nodes in consistent hashing?",
+   "back": "Each server gets many points on the ring, which evens out load and spreads a failed server's keys across many others.",
+   "kind": "basic"
+  },
+  {
+   "front": "What is rendezvous (highest random weight) hashing?",
+   "back": "For each key, score every server with hash(key, server) and pick the highest. Like consistent hashing, few keys move when servers change.",
+   "kind": "basic"
+  },
+  {
+   "front": "What does a Bloom filter answer, and what errors can it make?",
+   "back": "'Is X possibly in the set?' It can give false positives but never false negatives.",
+   "kind": "basic"
+  },
+  {
+   "front": "Why can't you delete from a standard Bloom filter?",
+   "back": "Clearing a bit might also remove other items that set it. A counting Bloom filter fixes this.",
+   "kind": "basic"
+  },
+  {
+   "front": "What is HyperLogLog used for?",
+   "back": "Estimating the number of distinct items (cardinality) using a tiny, fixed amount of memory.",
+   "kind": "basic"
+  },
+  {
+   "front": "What does a count-min sketch estimate?",
+   "back": "How often items appear in a stream (frequencies), possibly overestimating, never underestimating.",
+   "kind": "basic"
+  },
+  {
+   "front": "Cryptographic vs. non-cryptographic hash: which for a hash table?",
+   "back": "Non-cryptographic (e.g. MurmurHash, xxHash): much faster, and collision resistance against attackers isn't needed.",
+   "kind": "choice",
+   "choices": [
+    "SHA-256",
+    "bcrypt",
+    "MD5"
+   ]
+  },
+  {
+   "front": "Why store passwords with bcrypt, scrypt or Argon2 instead of SHA-256?",
+   "back": "They're deliberately slow and salted, which makes brute-force and rainbow-table attacks expensive.",
+   "kind": "basic"
+  },
+  {
+   "front": "ACID stands for…",
+   "back": "Atomicity, Consistency, Isolation, Durability.",
+   "kind": "basic"
+  },
+  {
+   "front": "Read committed vs. repeatable read",
+   "back": "Read committed only shows committed data but a re-read can change. Repeatable read keeps rows you've read stable for the whole transaction.",
+   "kind": "basic"
+  },
+  {
+   "front": "What anomaly does serializable isolation prevent that snapshot isolation allows?",
+   "back": "Write skew: two transactions read overlapping data and write different rows, breaking a rule neither saw broken.",
+   "kind": "choice",
+   "choices": [
+    "Dirty reads",
+    "Lost updates on the same row",
+    "Phantom reads only"
+   ]
+  },
+  {
+   "front": "What is MVCC?",
+   "back": "Multi-version concurrency control: writers create new row versions so readers see a consistent snapshot without blocking.",
+   "kind": "basic"
+  },
+  {
+   "front": "B-tree vs. LSM-tree: which favors write-heavy workloads?",
+   "back": "LSM-tree (buffers writes in memory, flushes sorted files, compacts later).",
+   "kind": "choice",
+   "choices": [
+    "B-tree",
+    "Hash index",
+    "Bitmap index"
+   ]
+  },
+  {
+   "front": "What is write amplification in an LSM-tree?",
+   "back": "Each logical write is rewritten several times during compaction, so disk writes exceed app writes.",
+   "kind": "basic"
+  },
+  {
+   "front": "What is a covering index?",
+   "back": "An index containing every column a query needs, so the database never has to read the table rows.",
+   "kind": "basic"
+  },
+  {
+   "front": "Composite index on (a, b): can it serve a filter on b alone?",
+   "back": "Usually not efficiently. Composite indexes work left to right (leftmost prefix).",
+   "kind": "basic"
+  },
+  {
+   "front": "Leader-follower replication: what is replication lag's classic user-facing bug?",
+   "back": "You write, then read from a stale follower and your own change seems missing. Fix with read-your-writes routing.",
+   "kind": "basic"
+  },
+  {
+   "front": "Synchronous vs. asynchronous replication trade-off",
+   "back": "Synchronous never loses acknowledged writes but adds latency and stalls on slow replicas. Async is fast but can lose recent writes on failover.",
+   "kind": "basic"
+  },
+  {
+   "front": "What does a quorum of W + R > N guarantee?",
+   "back": "Every read overlaps at least one replica holding the latest write.",
+   "kind": "basic"
+  },
+  {
+   "front": "CAP theorem in practice",
+   "back": "During a network partition, a system must choose between consistency and availability.",
+   "kind": "basic"
+  },
+  {
+   "front": "What does PACELC add to CAP?",
+   "back": "Else (no partition), there's still a trade-off between latency and consistency.",
+   "kind": "basic"
+  },
+  {
+   "front": "Range vs. hash partitioning",
+   "back": "Range keeps neighbors together (good scans, risk of hot spots). Hash spreads load evenly but range scans hit every shard.",
+   "kind": "basic"
+  },
+  {
+   "front": "What's a hot partition, and a common fix?",
+   "back": "One shard gets far more traffic than others. Fix by salting/splitting the hot key or choosing a better partition key.",
+   "kind": "basic"
+  },
+  {
+   "front": "Two-phase commit's big weakness",
+   "back": "If the coordinator dies after 'prepare', participants can block holding locks until it recovers.",
+   "kind": "basic"
+  },
+  {
+   "front": "What is the outbox pattern?",
+   "back": "Write the event to an outbox table in the same transaction as the data, then a relay publishes it. No dual-write inconsistency.",
+   "kind": "basic"
+  },
+  {
+   "front": "Kafka: what is the unit of parallelism and ordering?",
+   "back": "The partition. Order is guaranteed only within a partition.",
+   "kind": "choice",
+   "choices": [
+    "The topic",
+    "The broker",
+    "The consumer group"
+   ]
+  },
+  {
+   "front": "How does Kafka decide a message's partition?",
+   "back": "Hash of the message key (same key → same partition), or round-robin/sticky if there's no key.",
+   "kind": "basic"
+  },
+  {
+   "front": "Consumer group rule: max useful consumers for a topic with 6 partitions?",
+   "back": "6. Each partition goes to one consumer in the group; extras sit idle.",
+   "kind": "choice",
+   "choices": [
+    "3",
+    "12",
+    "Unlimited"
+   ]
+  },
+  {
+   "front": "What is a consumer offset?",
+   "back": "The position of the next message to read in a partition, committed so a consumer can resume after a restart.",
+   "kind": "basic"
+  },
+  {
+   "front": "acks=all in a Kafka producer means…",
+   "back": "The leader waits for all in-sync replicas to have the write before acknowledging.",
+   "kind": "basic"
+  },
+  {
+   "front": "What does min.insync.replicas protect against?",
+   "back": "With acks=all, writes fail unless at least that many replicas are in sync, preventing silent data loss.",
+   "kind": "basic"
+  },
+  {
+   "front": "At-least-once vs. at-most-once delivery",
+   "back": "At-least-once commits offsets after processing (may duplicate). At-most-once commits before (may lose).",
+   "kind": "basic"
+  },
+  {
+   "front": "How do you get effectively-once processing with at-least-once delivery?",
+   "back": "Make the consumer idempotent, e.g. dedupe by message ID or use upserts. Kafka also has idempotent producers and transactions.",
+   "kind": "basic"
+  },
+  {
+   "front": "What is log compaction in Kafka?",
+   "back": "Kafka keeps at least the latest value for each key and drops older ones, turning a topic into a durable changelog.",
+   "kind": "basic"
+  },
+  {
+   "front": "Kafka vs. a traditional queue (e.g. RabbitMQ): biggest model difference",
+   "back": "Kafka is a replayable log that consumers read at their own offsets. A queue removes messages once acknowledged.",
+   "kind": "basic"
+  },
+  {
+   "front": "What is a dead-letter queue?",
+   "back": "Where messages that repeatedly fail processing go, so they don't block the rest.",
+   "kind": "basic"
+  },
+  {
+   "front": "What is backpressure?",
+   "back": "A slow consumer signals producers to slow down (or buffers fill), instead of being overwhelmed.",
+   "kind": "basic"
+  },
+  {
+   "front": "Rate limiting: token bucket in one line",
+   "back": "Tokens refill at a steady rate up to a cap; each request spends one, which allows short bursts.",
+   "kind": "basic"
+  },
+  {
+   "front": "Why use exponential backoff with jitter on retries?",
+   "back": "Spreads retries out so many clients don't retry in lockstep and swamp a recovering service.",
+   "kind": "basic"
+  },
+  {
+   "front": "What is a circuit breaker?",
+   "back": "After repeated failures it stops calling a dependency for a while and fails fast, then tests with a few calls before closing.",
+   "kind": "basic"
+  },
+  {
+   "front": "What is an idempotency key?",
+   "back": "A client-supplied ID so a retried request (like a payment) is applied only once.",
+   "kind": "basic"
+  },
+  {
+   "front": "p99 latency means…",
+   "back": "99% of requests are faster than this. It reflects the slowest 1% that averages hide.",
+   "kind": "basic"
+  }
+ ]
+}

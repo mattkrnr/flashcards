@@ -1,0 +1,38 @@
+[
+ {
+  "id": "system-design",
+  "name": "System design: caching, hashing, databases, Kafka",
+  "description": "How the pieces of backend systems work and trade off.",
+  "count": 55
+ },
+ {
+  "id": "geo-continents",
+  "name": "Geography: which continent?",
+  "description": "Multiple choice. Countries people often get wrong.",
+  "count": 49
+ },
+ {
+  "id": "geo-map",
+  "name": "Geography: name the country on the map",
+  "description": "Multiple choice with a map. Each country's neighbors are the wrong answers.",
+  "count": 41
+ },
+ {
+  "id": "minecraft",
+  "name": "Minecraft: niche mechanics (Java 1.21)",
+  "description": "Redstone timings, spawning rules, rare items and recipes.",
+  "count": 44
+ },
+ {
+  "id": "tolkien",
+  "name": "Tolkien: Lord of the Rings & the Silmarillion",
+  "description": "From the First Age to the War of the Ring.",
+  "count": 51
+ },
+ {
+  "id": "bike-flats",
+  "name": "Bike repair: fixing a flat in a race",
+  "description": "Road and tri bikes: tubes, tubeless, CO2, and getting back on fast.",
+  "count": 34
+ }
+]

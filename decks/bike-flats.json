@@ -1,0 +1,202 @@
+{
+ "id": "bike-flats",
+ "name": "Bike repair: fixing a flat in a race",
+ "description": "Road and tri bikes: tubes, tubeless, CO2, and getting back on fast.",
+ "cards": [
+  {
+   "front": "First thing to do when you flat during a race",
+   "back": "Pull safely off the course, out of the way of other riders.",
+   "kind": "basic"
+  },
+  {
+   "front": "Before removing the rear wheel, shift into…",
+   "back": "The smallest rear cog (hardest gear), so the wheel drops out easily.",
+   "kind": "choice",
+   "choices": [
+    "The biggest rear cog",
+    "The small chainring",
+    "It doesn't matter"
+   ]
+  },
+  {
+   "front": "Rim brakes: what to open before removing the wheel?",
+   "back": "The brake caliper's quick-release, so the tire clears the pads.",
+   "kind": "basic"
+  },
+  {
+   "front": "Disc brakes: what not to do with the wheel out?",
+   "back": "Don't squeeze the brake lever, or the pads close together. Use a pad spacer if you have one.",
+   "kind": "basic"
+  },
+  {
+   "front": "Essential race flat kit",
+   "back": "Spare tube, 2 tire levers, CO2 inflator + cartridge(s) or a mini pump, a tire boot, and a multitool.",
+   "kind": "basic"
+  },
+  {
+   "front": "Why carry a tire boot?",
+   "back": "To cover a sidewall or tread cut so the new tube doesn't bulge out and burst.",
+   "kind": "basic"
+  },
+  {
+   "front": "Emergency tire boot if you have none",
+   "back": "A folded dollar bill, gel wrapper, or energy-bar wrapper.",
+   "kind": "basic"
+  },
+  {
+   "front": "Before installing the new tube, always…",
+   "back": "Run your fingers carefully around the inside of the tire to find and remove whatever caused the flat.",
+   "kind": "basic"
+  },
+  {
+   "front": "Why add a little air to the new tube before installing it?",
+   "back": "It gives the tube shape so it doesn't twist or get pinched under the tire bead.",
+   "kind": "basic"
+  },
+  {
+   "front": "Seating the bead: where do you start, and where do you finish?",
+   "back": "Start at the valve, work both ways around, and finish opposite it. Then push the valve up into the tire so the tube isn't trapped under the bead.",
+   "kind": "basic"
+  },
+  {
+   "front": "Trick for the last, tight section of bead",
+   "back": "Push the already-seated bead into the rim's center channel all the way around to gain slack.",
+   "kind": "basic"
+  },
+  {
+   "front": "Why avoid tire levers for the last bit of bead?",
+   "back": "Levers can pinch and puncture the new tube.",
+   "kind": "basic"
+  },
+  {
+   "front": "After seating the tire, before full inflation, check…",
+   "back": "That no tube is caught under the bead and the bead line sits evenly all around.",
+   "kind": "basic"
+  },
+  {
+   "front": "Presta valve: what to do before inflating?",
+   "back": "Unscrew the small knurled nut at the tip (and tap it to free it).",
+   "kind": "basic"
+  },
+  {
+   "front": "Deep-section race wheels need what from your spare tube?",
+   "back": "A long enough valve stem (e.g. 60–80 mm), or a valve extender.",
+   "kind": "basic"
+  },
+  {
+   "front": "Why hold a CO2 cartridge with a sleeve or gloves?",
+   "back": "It gets extremely cold as it discharges and can freeze-burn your fingers.",
+   "kind": "basic"
+  },
+  {
+   "front": "After the race, what should you do with a CO2-filled tube?",
+   "back": "Let it out and refill with air. CO2 seeps through butyl tubes quickly.",
+   "kind": "basic"
+  },
+  {
+   "front": "Roughly how much does one 16 g CO2 cartridge inflate?",
+   "back": "About one road tire to riding pressure. Carry two in case the first one gets wasted.",
+   "kind": "choice",
+   "choices": [
+    "Half a road tire",
+    "Three road tires",
+    "A mountain bike tire to 100 psi"
+   ]
+  },
+  {
+   "front": "Two parallel slits in a tube ('snakebite') mean…",
+   "back": "A pinch flat: the tube got pinched against the rim, usually from low pressure.",
+   "kind": "choice",
+   "choices": [
+    "Glass puncture",
+    "Valve failure",
+    "Rim tape failure"
+   ]
+  },
+  {
+   "front": "A puncture on the inner side of the tube (rim side) usually means…",
+   "back": "Rim tape problem: a spoke hole or sharp edge is exposed.",
+   "kind": "choice",
+   "choices": [
+    "Glass in the tread",
+    "Pinch flat",
+    "Over-inflation"
+   ]
+  },
+  {
+   "front": "Tubeless: what fixes a hole too big for sealant?",
+   "back": "A tire plug (a 'bacon strip'), then re-inflate.",
+   "kind": "basic"
+  },
+  {
+   "front": "Tubeless sealant hissing: how to help it seal?",
+   "back": "Spin the wheel so the hole is at the bottom, letting sealant pool over it, then ride a bit.",
+   "kind": "basic"
+  },
+  {
+   "front": "Tubeless tire won't hold after plugging: last resort?",
+   "back": "Remove the valve and install a spare inner tube.",
+   "kind": "basic"
+  },
+  {
+   "front": "Reinstalling the rear wheel: where should the chain go?",
+   "back": "Over the smallest rear cog, then drop the wheel into the dropouts.",
+   "kind": "basic"
+  },
+  {
+   "front": "Quick-release skewer: correct closing technique",
+   "back": "Close the lever firmly enough to leave an imprint in your palm. Don't spin it like a wing nut.",
+   "kind": "basic"
+  },
+  {
+   "front": "Last check before riding off after a rim-brake wheel change",
+   "back": "Close the brake caliper quick-release again and test both brakes.",
+   "kind": "basic"
+  },
+  {
+   "front": "Chain dropped off the small chainring: fastest fix?",
+   "back": "Shift to the small ring, push the rear derailleur cage forward for slack, and lift the chain on by hand.",
+   "kind": "basic"
+  },
+  {
+   "front": "Why line the tire logo up with the valve?",
+   "back": "So the hole in a tube points you to the matching spot on the tire to search for the cause.",
+   "kind": "basic"
+  },
+  {
+   "front": "Patch or replace the tube mid-race?",
+   "back": "Replace. It's much faster. Patch the old tube later.",
+   "kind": "choice",
+   "choices": [
+    "Patch",
+    "Use sealant in a butyl tube",
+    "Ride flat to the finish"
+   ]
+  },
+  {
+   "front": "Triathlon rule on mechanical help",
+   "back": "Usually no outside assistance: you fix it yourself. Check your race's rules.",
+   "kind": "basic"
+  },
+  {
+   "front": "Best way to get fast at flat changes",
+   "back": "Practice at home and time yourself, with the exact kit you race with.",
+   "kind": "basic"
+  },
+  {
+   "front": "Where should spare-tube kit go on a tri bike?",
+   "back": "Somewhere you can reach with the bike upside down, e.g. a saddle pack or behind-seat mount, secured so it can't eject.",
+   "kind": "basic"
+  },
+  {
+   "front": "Tire direction arrows: does it matter?",
+   "back": "Yes, on many tires. Follow the arrow for intended grip and wear.",
+   "kind": "basic"
+  },
+  {
+   "front": "Rolling but rubbing after reinstalling the wheel?",
+   "back": "The wheel probably isn't fully seated in the dropouts. Reopen, push it fully in, then close.",
+   "kind": "basic"
+  }
+ ]
+}

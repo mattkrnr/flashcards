@@ -1,0 +1,362 @@
+{
+ "id": "minecraft",
+ "name": "Minecraft: niche mechanics (Java 1.21)",
+ "description": "Redstone timings, spawning rules, rare items and recipes.",
+ "cards": [
+  {
+   "front": "How many game ticks are in one redstone tick?",
+   "back": "2 (a redstone tick is 0.1 s)",
+   "kind": "choice",
+   "choices": [
+    "1",
+    "4",
+    "20"
+   ]
+  },
+  {
+   "front": "How long is a full Minecraft day in game ticks?",
+   "back": "24,000 ticks (20 minutes)",
+   "kind": "basic"
+  },
+  {
+   "front": "How fast does a hopper move items?",
+   "back": "2.5 items per second (one every 8 game ticks)",
+   "kind": "choice",
+   "choices": [
+    "1 item per second",
+    "5 items per second",
+    "8 items per second"
+   ]
+  },
+  {
+   "front": "How many items must a hopper hold for a comparator to output signal 15?",
+   "back": "320 (all 5 slots full of 64-stacks)",
+   "kind": "basic"
+  },
+  {
+   "front": "Maximum number of blocks a piston can push",
+   "back": "12",
+   "kind": "choice",
+   "choices": [
+    "8",
+    "16",
+    "24"
+   ]
+  },
+  {
+   "front": "Which block does NOT stick to slime or honey blocks, but can still be pushed?",
+   "back": "Glazed terracotta",
+   "kind": "choice",
+   "choices": [
+    "Obsidian",
+    "Observer",
+    "Redstone block"
+   ]
+  },
+  {
+   "front": "Do slime blocks and honey blocks stick to each other?",
+   "back": "No. That's why they're used side by side in flying machines.",
+   "kind": "basic"
+  },
+  {
+   "front": "Which block under a note block gives the 'bell' (glockenspiel) sound?",
+   "back": "Gold block",
+   "kind": "choice",
+   "choices": [
+    "Packed ice",
+    "Clay",
+    "Bone block"
+   ]
+  },
+  {
+   "front": "Note block on packed ice plays…",
+   "back": "Chimes",
+   "kind": "choice",
+   "choices": [
+    "Flute",
+    "Bell",
+    "Xylophone"
+   ]
+  },
+  {
+   "front": "Note block on a bone block plays…",
+   "back": "Xylophone",
+   "kind": "choice",
+   "choices": [
+    "Chimes",
+    "Bass drum",
+    "Guitar"
+   ]
+  },
+  {
+   "front": "What does a copper bulb do with each redstone pulse?",
+   "back": "Toggles its light on or off, like a T flip-flop.",
+   "kind": "basic"
+  },
+  {
+   "front": "Horizontal travel ratio between the Nether and the Overworld",
+   "back": "1 block in the Nether = 8 in the Overworld",
+   "kind": "basic"
+  },
+  {
+   "front": "Overworld build range since 1.18",
+   "back": "y = -64 to y = 319",
+   "kind": "basic"
+  },
+  {
+   "front": "At what y-level is ancient debris most commonly mined?",
+   "back": "Around y = 15",
+   "kind": "choice",
+   "choices": [
+    "y = -59",
+    "y = 64",
+    "y = 110"
+   ]
+  },
+  {
+   "front": "Netherite ingot recipe",
+   "back": "4 netherite scrap + 4 gold ingots",
+   "kind": "basic"
+  },
+  {
+   "front": "Where do netherite upgrade smithing templates generate?",
+   "back": "Bastion remnants",
+   "kind": "choice",
+   "choices": [
+    "Nether fortresses",
+    "Ancient cities",
+    "End cities"
+   ]
+  },
+  {
+   "front": "Max light level at which hostile mobs spawn on blocks (1.18+)",
+   "back": "Block light 0",
+   "kind": "choice",
+   "choices": [
+    "7",
+    "3",
+    "11"
+   ]
+  },
+  {
+   "front": "Default randomTickSpeed",
+   "back": "3",
+   "kind": "choice",
+   "choices": [
+    "1",
+    "10",
+    "20"
+   ]
+  },
+  {
+   "front": "Overworld hostile mob cap (Java)",
+   "back": "70",
+   "kind": "choice",
+   "choices": [
+    "50",
+    "100",
+    "120"
+   ]
+  },
+  {
+   "front": "Beyond what distance do most hostile mobs despawn instantly?",
+   "back": "128 blocks",
+   "kind": "choice",
+   "choices": [
+    "64 blocks",
+    "96 blocks",
+    "256 blocks"
+   ]
+  },
+  {
+   "front": "How close must a player be for a monster spawner to activate?",
+   "back": "16 blocks",
+   "kind": "choice",
+   "choices": [
+    "8 blocks",
+    "32 blocks",
+    "64 blocks"
+   ]
+  },
+  {
+   "front": "How long until a dropped item despawns?",
+   "back": "5 minutes (6,000 ticks) in loaded chunks",
+   "kind": "basic"
+  },
+  {
+   "front": "After how long without sleeping can phantoms spawn?",
+   "back": "3 in-game days (72,000 ticks)",
+   "kind": "basic"
+  },
+  {
+   "front": "Blocks needed for a full 4-level beacon pyramid",
+   "back": "164",
+   "kind": "choice",
+   "choices": [
+    "120",
+    "128",
+    "196"
+   ]
+  },
+  {
+   "front": "Blocks needed to fully power a conduit",
+   "back": "42 prismarine-family blocks (16 is the minimum)",
+   "kind": "basic"
+  },
+  {
+   "front": "Items smelted by one lava bucket",
+   "back": "100",
+   "kind": "choice",
+   "choices": [
+    "64",
+    "80",
+    "200"
+   ]
+  },
+  {
+   "front": "Items smelted by one blaze rod",
+   "back": "12",
+   "kind": "choice",
+   "choices": [
+    "8",
+    "16",
+    "20"
+   ]
+  },
+  {
+   "front": "Items smelted by one dried kelp block",
+   "back": "20",
+   "kind": "choice",
+   "choices": [
+    "8",
+    "12",
+    "16"
+   ]
+  },
+  {
+   "front": "Which mob is the only source of tridents?",
+   "back": "Drowned (only ones that spawn holding a trident can drop it)",
+   "kind": "basic"
+  },
+  {
+   "front": "Which trident enchantment can't be combined with Loyalty or Channeling?",
+   "back": "Riptide",
+   "kind": "choice",
+   "choices": [
+    "Impaling",
+    "Mending",
+    "Unbreaking"
+   ]
+  },
+  {
+   "front": "Which two bow enchantments are mutually exclusive?",
+   "back": "Infinity and Mending",
+   "kind": "choice",
+   "choices": [
+    "Power and Punch",
+    "Flame and Infinity",
+    "Punch and Mending"
+   ]
+  },
+  {
+   "front": "What makes a shulker duplicate (1.17+)?",
+   "back": "Another shulker's bullet hitting a shulker, if there's room nearby",
+   "kind": "basic"
+  },
+  {
+   "front": "Which block can't be obtained in survival even with Silk Touch?",
+   "back": "Budding amethyst",
+   "kind": "choice",
+   "choices": [
+    "Sculk shrieker",
+    "Sculk catalyst",
+    "Small amethyst bud"
+   ]
+  },
+  {
+   "front": "Reinforced deepslate generates where?",
+   "back": "Around the portal frame in ancient cities (unobtainable in survival)",
+   "kind": "basic"
+  },
+  {
+   "front": "Health of the Warden",
+   "back": "500 HP (250 hearts)",
+   "kind": "choice",
+   "choices": [
+    "300 HP",
+    "200 HP",
+    "1,024 HP"
+   ]
+  },
+  {
+   "front": "Recovery compass recipe",
+   "back": "8 echo shards around a compass",
+   "kind": "basic"
+  },
+  {
+   "front": "Chance of a blue axolotl when breeding",
+   "back": "1 in 1,200",
+   "kind": "choice",
+   "choices": [
+    "1 in 100",
+    "1 in 500",
+    "1 in 10,000"
+   ]
+  },
+  {
+   "front": "How do you turn a red mooshroom brown?",
+   "back": "It has to be struck by lightning",
+   "kind": "basic"
+  },
+  {
+   "front": "A temperate (orange) frog eating a small magma cube drops…",
+   "back": "Ochre froglight",
+   "kind": "choice",
+   "choices": [
+    "Verdant froglight",
+    "Pearlescent froglight",
+    "Nothing"
+   ]
+  },
+  {
+   "front": "Mace recipe",
+   "back": "Heavy core + breeze rod",
+   "kind": "basic"
+  },
+  {
+   "front": "How many wind charges does one breeze rod craft?",
+   "back": "4",
+   "kind": "choice",
+   "choices": [
+    "1",
+    "2",
+    "8"
+   ]
+  },
+  {
+   "front": "Which enchantment is exclusive to the mace?",
+   "back": "Breach (also Density and Wind Burst)",
+   "kind": "choice",
+   "choices": [
+    "Impaling",
+    "Sweeping Edge",
+    "Piercing"
+   ]
+  },
+  {
+   "front": "What item opens an ominous vault?",
+   "back": "An ominous trial key",
+   "kind": "choice",
+   "choices": [
+    "A trial key",
+    "A heavy core",
+    "A breeze rod"
+   ]
+  },
+  {
+   "front": "Max anvil cost before 'Too Expensive!' in survival",
+   "back": "39 levels (40+ is too expensive)",
+   "kind": "basic"
+  }
+ ]
+}

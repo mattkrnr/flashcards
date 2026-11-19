@@ -8,6 +8,8 @@
 <meta name="theme-color" content="#f6f7fb">
 <title>Flashcards</title>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <style>
   :root { --bg:#f6f7fb; --card:#fff; --ink:#1b1d24; --muted:#6f7482; --line:#e3e5ec; --accent:#4a55c9; --accent-soft:#e7e9fb; --again:#c2453d; --hard:#c98a1b; --good:#2f8a57; --easy:#4a55c9; }
   * { box-sizing:border-box; }
@@ -42,6 +44,18 @@
   .cardrow:last-child { border-bottom:0; }
   .hidden { display:none !important; }
   .toast { position:fixed; left:50%; bottom:24px; transform:translateX(-50%); background:var(--ink); color:#fff; padding:8px 16px; border-radius:999px; font-size:14px; }
+  .options { display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-bottom:12px; }
+  .options button { background:var(--card); color:var(--ink); border:1px solid var(--line); padding:14px 10px; font-size:16px; text-align:left; }
+  .options button small { color:var(--muted); margin-right:6px; }
+  .options button.right { background:#e3f3ea; border-color:var(--good); color:var(--good); font-weight:600; }
+  .options button.wrong { background:#fbe6e4; border-color:var(--again); color:var(--again); }
+  .options button:disabled { opacity:1; cursor:default; }
+  #map { height:280px; border-radius:14px; margin-bottom:12px; border:1px solid var(--line); z-index:0; }
+  .lib { display:flex; align-items:center; gap:10px; padding:10px 0; border-bottom:1px solid var(--line); }
+  .lib:last-child { border-bottom:0; }
+  .lib .grow { flex:1; min-width:0; }
+  .kind { font-size:11px; font-weight:600; text-transform:uppercase; letter-spacing:.04em; color:var(--muted); }
+  @media (max-width:420px) { .options { grid-template-columns:1fr; } }
 </style>
 </head>
 <body>
@@ -61,6 +75,11 @@
     <button id="study-all" style="width:100%; margin-bottom:14px">Study all due cards</button>
     <div id="decks"></div>
     <div class="card">
+      <h2>Starter decks</h2>
+      <p class="muted" style="margin-top:0">Ready-made decks. Adding one copies it into your account so your progress is your own.</p>
+      <div id="library"><p class="muted">Loading…</p></div>
+    </div>
+    <div class="card">
       <h2>New deck</h2>
       <div class="row"><input id="deck-name" placeholder="e.g. World capitals, Spanish, US presidents"><button id="add-deck">Create</button></div>
       <p class="muted" style="margin-bottom:0">Tip: ask Claude to make a deck for you. It can add cards straight to your account.</p>
@@ -72,7 +91,7 @@
     <button id="study-deck" style="width:100%; margin-bottom:14px">Study</button>
     <div class="card">
       <h2>Add cards</h2>
-      <p class="muted" style="margin-top:0">One per line: <code>front | back</code> (tabs from a spreadsheet work too)</p>
+      <p class="muted" style="margin-top:0">One per line: <code>front | back</code>. For multiple choice add wrong answers: <code>front | right | wrong; wrong; wrong</code>. Tabs from a spreadsheet work too.</p>
       <textarea id="bulk" placeholder="Capital of Australia | Canberra&#10;Largest planet | Jupiter"></textarea>
       <div class="row" style="margin-top:10px; justify-content:flex-end"><button id="add-cards">Add</button></div>
     </div>
@@ -87,7 +106,9 @@
   <section id="study" class="hidden">
     <div class="progress"><div id="bar" style="width:0"></div></div>
     <p class="muted" id="study-meta"></p>
+    <div id="map" class="hidden"></div>
     <div class="card study-card" id="study-card"></div>
+    <div class="options hidden" id="options"></div>
     <div class="grades hidden" id="grades">
       <button class="g1" data-q="1">Again<small>&lt;1d</small></button>
       <button class="g3" data-q="3">Hard<small id="i3"></small></button>
@@ -112,6 +133,7 @@ const today = () => new Date().toLocaleDateString('en-CA');
 const addDays = n => { const d = new Date(); d.setDate(d.getDate() + n); return d.toLocaleDateString('en-CA'); };
 const toast = msg => { const t = document.createElement('div'); t.className = 'toast'; t.textContent = msg; document.body.append(t); setTimeout(() => t.remove(), 2200); };
 
+let library = [];   // starter decks from decks/index.json
 let decks = [], cards = [], currentDeck = null, queue = [], studied = 0, sessionSize = 0, started = false;
 
 // ───────── Auth ─────────
@@ -151,6 +173,7 @@ async function loadAll() {
   ]);
   if (d.error || c.error) return toast((d.error || c.error).message);
   decks = d.data; cards = c.data;
+  if (!library.length) try { library = await (await fetch('decks/index.json', { cache: 'no-cache' })).json(); } catch { library = []; }
   if (currentDeck && !decks.find(x => x.id === currentDeck.id)) currentDeck = null;
   if ($('study').classList.contains('hidden')) currentDeck ? openDeck(currentDeck.id) : renderHome();
 }
@@ -167,6 +190,28 @@ function renderHome() {
     return `<div class="card deck" data-id="${d.id}"><div><b>${esc(d.name)}</b><div class="muted">${n} card${n === 1 ? '' : 's'}</div></div><span class="due ${due ? '' : 'zero'}">${due} due</span></div>`;
   }).join('') : `<p class="muted">No decks yet. Create one below.</p>`;
   $('decks').querySelectorAll('.deck').forEach(el => el.onclick = () => openDeck(el.dataset.id));
+  $('library').innerHTML = library.length ? library.map(l => {
+    const have = decks.some(d => d.source === l.id);
+    return `<div class="lib"><div class="grow"><b>${esc(l.name)}</b><div class="muted">${esc(l.description)} · ${l.count} cards</div></div>
+      <button class="${have ? 'ghost' : ''}" data-lib="${l.id}" ${have ? 'disabled' : ''}>${have ? 'Added ✓' : 'Add'}</button></div>`;
+  }).join('') : '<p class="muted" style="margin:0">Couldn\'t load starter decks.</p>';
+  $('library').querySelectorAll('[data-lib]').forEach(b => b.onclick = () => addStarter(b.dataset.lib, b));
+}
+async function addStarter(id, btn) {
+  btn.disabled = true; btn.textContent = 'Adding…';
+  try {
+    const deck = await (await fetch(`decks/${id}.json`, { cache: 'no-cache' })).json();
+    const { data: d, error } = await sb.from('flashcards_decks').insert({ name: deck.name, source: id }).select().single();
+    if (error) throw error;
+    const rows = deck.cards.map(c => ({ deck_id: d.id, front: c.front, back: c.back, kind: c.kind || 'basic', choices: c.choices || [],
+      lat: c.lat ?? null, lng: c.lng ?? null, zoom: c.zoom ?? null }));
+    for (let i = 0; i < rows.length; i += 200) {
+      const { data, error: e2 } = await sb.from('flashcards_cards').insert(rows.slice(i, i + 200)).select();
+      if (e2) throw e2;
+      cards = cards.concat(data);
+    }
+    decks.push(d); toast(`Added ${rows.length} cards`); renderHome();
+  } catch (e) { toast(e.message || 'Could not add deck'); btn.disabled = false; btn.textContent = 'Add'; }
 }
 $('add-deck').onclick = async () => {
   const name = $('deck-name').value.trim(); if (!name) return;
@@ -184,7 +229,7 @@ function openDeck(id) {
   $('study-deck').textContent = due ? `Study (${due} due)` : 'Nothing due — study anyway';
   $('card-count').textContent = `${list.length} card${list.length === 1 ? '' : 's'}`;
   $('card-list').innerHTML = list.map(c => `
-    <div class="cardrow"><span><b>${esc(c.front)}</b><br><span class="muted">${esc(c.back)}</span></span>
+    <div class="cardrow"><span>${c.kind && c.kind !== 'basic' ? `<span class="kind">${c.kind === 'map' ? 'Map' : 'Multiple choice'}</span><br>` : ''}<b>${esc(c.front)}</b><br><span class="muted">${esc(c.back)}</span></span>
     <span style="text-align:right; white-space:nowrap"><span class="muted">${c.due <= today() ? 'due' : 'due ' + c.due.slice(5)}</span><br><button class="ghost danger" data-del="${c.id}">Delete</button></span></div>`).join('') || '<p class="muted">No cards yet.</p>';
   $('card-list').querySelectorAll('[data-del]').forEach(b => b.onclick = async () => {
     const { error } = await sb.from('flashcards_cards').delete().eq('id', b.dataset.del);
@@ -194,10 +239,10 @@ function openDeck(id) {
 }
 $('add-cards').onclick = async () => {
   const rows = $('bulk').value.split('\n').map(line => {
-    const parts = line.includes('\t') ? line.split('\t') : line.split('|');
-    if (parts.length < 2) return null;
-    const front = parts[0].trim(), back = parts.slice(1).join(line.includes('\t') ? ' ' : '|').trim();
-    return front && back ? { deck_id: currentDeck.id, front, back } : null;
+    const parts = (line.includes('\t') ? line.split('\t') : line.split('|')).map(x => x.trim());
+    if (parts.length < 2 || !parts[0] || !parts[1]) return null;
+    const choices = parts[2] ? parts[2].split(';').map(x => x.trim()).filter(Boolean) : [];
+    return { deck_id: currentDeck.id, front: parts[0], back: parts[1], kind: choices.length ? 'choice' : 'basic', choices };
   }).filter(Boolean);
   if (!rows.length) return toast('Use "front | back", one per line');
   const { data, error } = await sb.from('flashcards_cards').insert(rows).select();
@@ -249,13 +294,57 @@ function nextCard() {
   if (!queue.length) {
     $('study-card').innerHTML = `<div>Done! 🎉<div class="muted" style="font-size:15px; margin-top:8px">${studied} review${studied === 1 ? '' : 's'}</div></div>`;
     $('grades').classList.add('hidden'); $('reveal').classList.remove('hidden');
+    $('options').classList.add('hidden'); showMap(null);
     $('reveal').textContent = 'Back'; $('reveal').onclick = () => { $('reveal').textContent = 'Show answer'; $('reveal').onclick = reveal; currentDeck ? openDeck(currentDeck.id) : renderHome(); };
     $('study-meta').textContent = ''; return;
   }
   const c = queue[0];
   $('study-meta').textContent = `${queue.length} left${currentDeck ? '' : ' · ' + (decks.find(d => d.id === c.deck_id)?.name || '')}`;
   $('study-card').innerHTML = `<div>${esc(c.front)}</div>`;
-  $('grades').classList.add('hidden'); $('reveal').classList.remove('hidden');
+  $('grades').classList.add('hidden'); showAllGrades(true);
+  showMap(c);
+  if (c.choices && c.choices.length) {
+    // Multiple choice (and map cards): pick an answer instead of revealing
+    $('reveal').classList.add('hidden');
+    const opts = [c.back, ...c.choices].sort(() => Math.random() - .5);
+    $('options').innerHTML = opts.map((o, i) => `<button data-opt="${esc(o)}"><small>${i + 1}</small>${esc(o)}</button>`).join('');
+    $('options').classList.remove('hidden');
+    $('options').querySelectorAll('button').forEach(b => b.onclick = () => choose(b.dataset.opt));
+  } else {
+    $('options').classList.add('hidden'); $('reveal').classList.remove('hidden');
+  }
+}
+function choose(picked) {
+  const c = queue[0]; if (!c || !$('grades').classList.contains('hidden')) return;
+  const right = picked === c.back;
+  $('options').querySelectorAll('button').forEach(b => {
+    b.disabled = true;
+    if (b.dataset.opt === c.back) b.classList.add('right'); else if (b.dataset.opt === picked) b.classList.add('wrong');
+  });
+  for (const q of [3,4,5]) $('i' + q).textContent = label(schedule(c, q).interval_days);
+  showAllGrades(right);            // a wrong pick can only be graded Again
+  $('grades').classList.remove('hidden');
+}
+function showAllGrades(all) {
+  $('grades').querySelectorAll('button').forEach(b => b.classList.toggle('hidden', !all && b.dataset.q !== '1'));
+  $('grades').style.gridTemplateColumns = all ? '' : '1fr';
+}
+let leaflet = null, pin = null;
+function showMap(c) {
+  const isMap = c && c.kind === 'map' && c.lat != null && window.L;
+  $('map').classList.toggle('hidden', !isMap);
+  if (!isMap) return;
+  if (!leaflet) {
+    leaflet = L.map('map', { zoomSnap: 0.5, attributionControl: true, worldCopyJump: true });
+    // No-labels basemap so the country names don't give the answer away
+    L.tileLayer('https://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}{r}.png', {
+      maxZoom: 10, subdomains: 'abcd', attribution: '&copy; OpenStreetMap contributors &copy; CARTO',
+    }).addTo(leaflet);
+  }
+  leaflet.invalidateSize();
+  leaflet.setView([c.lat, c.lng], c.zoom || 4);
+  if (pin) pin.remove();
+  pin = L.circleMarker([c.lat, c.lng], { radius: 9, color: '#c2453d', weight: 3, fillColor: '#c2453d', fillOpacity: .35 }).addTo(leaflet);
 }
 function reveal() {
   const c = queue[0]; if (!c) return;
@@ -281,7 +370,11 @@ document.addEventListener('keydown', e => {
   if ($('study').classList.contains('hidden')) return;
   if (e.key === ' ' && !$('reveal').classList.contains('hidden')) { e.preventDefault(); $('reveal').click(); }
   const map = { '1': 0, '2': 1, '3': 2, '4': 3 };
-  if (e.key in map && !$('grades').classList.contains('hidden')) $('grades').querySelectorAll('button')[map[e.key]].click();
+  if (!(e.key in map)) return;
+  if (!$('grades').classList.contains('hidden')) {
+    const visible = [...$('grades').querySelectorAll('button')].filter(b => !b.classList.contains('hidden'));
+    (visible.length === 1 ? visible[0] : visible[map[e.key]])?.click();
+  } else if (!$('options').classList.contains('hidden')) $('options').querySelectorAll('button')[map[e.key]]?.click();
 });
 </script>
 </body>

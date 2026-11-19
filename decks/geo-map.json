@@ -1,0 +1,540 @@
+{
+ "id": "geo-map",
+ "name": "Geography: name the country on the map",
+ "description": "Multiple choice with a map. Each country's neighbors are the wrong answers.",
+ "cards": [
+  {
+   "front": "Which country is marked?",
+   "back": "Mongolia",
+   "kind": "map",
+   "choices": [
+    "Kazakhstan",
+    "China",
+    "Russia"
+   ],
+   "lat": 46.9,
+   "lng": 103.8,
+   "zoom": 3.5
+  },
+  {
+   "front": "Which country is marked?",
+   "back": "Kazakhstan",
+   "kind": "map",
+   "choices": [
+    "Uzbekistan",
+    "Mongolia",
+    "Turkmenistan"
+   ],
+   "lat": 48.0,
+   "lng": 67.0,
+   "zoom": 3.5
+  },
+  {
+   "front": "Which country is marked?",
+   "back": "Uzbekistan",
+   "kind": "map",
+   "choices": [
+    "Turkmenistan",
+    "Kazakhstan",
+    "Kyrgyzstan"
+   ],
+   "lat": 41.4,
+   "lng": 64.6,
+   "zoom": 4.5
+  },
+  {
+   "front": "Which country is marked?",
+   "back": "Afghanistan",
+   "kind": "map",
+   "choices": [
+    "Pakistan",
+    "Iran",
+    "Tajikistan"
+   ],
+   "lat": 33.9,
+   "lng": 67.7,
+   "zoom": 4.5
+  },
+  {
+   "front": "Which country is marked?",
+   "back": "Iran",
+   "kind": "map",
+   "choices": [
+    "Iraq",
+    "Afghanistan",
+    "Pakistan"
+   ],
+   "lat": 32.4,
+   "lng": 53.7,
+   "zoom": 4
+  },
+  {
+   "front": "Which country is marked?",
+   "back": "Pakistan",
+   "kind": "map",
+   "choices": [
+    "Afghanistan",
+    "India",
+    "Iran"
+   ],
+   "lat": 30.4,
+   "lng": 69.3,
+   "zoom": 4
+  },
+  {
+   "front": "Which country is marked?",
+   "back": "Myanmar",
+   "kind": "map",
+   "choices": [
+    "Thailand",
+    "Bangladesh",
+    "Laos"
+   ],
+   "lat": 21.9,
+   "lng": 95.9,
+   "zoom": 4.5
+  },
+  {
+   "front": "Which country is marked?",
+   "back": "Laos",
+   "kind": "map",
+   "choices": [
+    "Vietnam",
+    "Thailand",
+    "Cambodia"
+   ],
+   "lat": 19.9,
+   "lng": 102.5,
+   "zoom": 5
+  },
+  {
+   "front": "Which country is marked?",
+   "back": "Cambodia",
+   "kind": "map",
+   "choices": [
+    "Laos",
+    "Thailand",
+    "Vietnam"
+   ],
+   "lat": 12.6,
+   "lng": 104.9,
+   "zoom": 5
+  },
+  {
+   "front": "Which country is marked?",
+   "back": "Thailand",
+   "kind": "map",
+   "choices": [
+    "Myanmar",
+    "Cambodia",
+    "Laos"
+   ],
+   "lat": 15.9,
+   "lng": 100.9,
+   "zoom": 4.5
+  },
+  {
+   "front": "Which country is marked?",
+   "back": "Saudi Arabia",
+   "kind": "map",
+   "choices": [
+    "Yemen",
+    "Oman",
+    "Iraq"
+   ],
+   "lat": 23.9,
+   "lng": 45.1,
+   "zoom": 4
+  },
+  {
+   "front": "Which country is marked?",
+   "back": "Turkey",
+   "kind": "map",
+   "choices": [
+    "Greece",
+    "Syria",
+    "Georgia"
+   ],
+   "lat": 39.0,
+   "lng": 35.2,
+   "zoom": 4.5
+  },
+  {
+   "front": "Which country is marked?",
+   "back": "Ukraine",
+   "kind": "map",
+   "choices": [
+    "Belarus",
+    "Poland",
+    "Romania"
+   ],
+   "lat": 48.4,
+   "lng": 31.2,
+   "zoom": 4.5
+  },
+  {
+   "front": "Which country is marked?",
+   "back": "Poland",
+   "kind": "map",
+   "choices": [
+    "Germany",
+    "Czechia",
+    "Belarus"
+   ],
+   "lat": 52.0,
+   "lng": 19.1,
+   "zoom": 5
+  },
+  {
+   "front": "Which country is marked?",
+   "back": "Romania",
+   "kind": "map",
+   "choices": [
+    "Bulgaria",
+    "Hungary",
+    "Moldova"
+   ],
+   "lat": 45.9,
+   "lng": 25.0,
+   "zoom": 5
+  },
+  {
+   "front": "Which country is marked?",
+   "back": "Hungary",
+   "kind": "map",
+   "choices": [
+    "Austria",
+    "Slovakia",
+    "Romania"
+   ],
+   "lat": 47.2,
+   "lng": 19.5,
+   "zoom": 5.5
+  },
+  {
+   "front": "Which country is marked?",
+   "back": "Austria",
+   "kind": "map",
+   "choices": [
+    "Switzerland",
+    "Czechia",
+    "Hungary"
+   ],
+   "lat": 47.5,
+   "lng": 14.6,
+   "zoom": 5.5
+  },
+  {
+   "front": "Which country is marked?",
+   "back": "Serbia",
+   "kind": "map",
+   "choices": [
+    "Croatia",
+    "Bulgaria",
+    "Bosnia and Herzegovina"
+   ],
+   "lat": 44.0,
+   "lng": 20.9,
+   "zoom": 5.5
+  },
+  {
+   "front": "Which country is marked?",
+   "back": "Portugal",
+   "kind": "map",
+   "choices": [
+    "Spain",
+    "Morocco",
+    "Andorra"
+   ],
+   "lat": 39.6,
+   "lng": -8.0,
+   "zoom": 5
+  },
+  {
+   "front": "Which country is marked?",
+   "back": "Finland",
+   "kind": "map",
+   "choices": [
+    "Sweden",
+    "Norway",
+    "Estonia"
+   ],
+   "lat": 64.0,
+   "lng": 26.0,
+   "zoom": 4
+  },
+  {
+   "front": "Which country is marked?",
+   "back": "Algeria",
+   "kind": "map",
+   "choices": [
+    "Libya",
+    "Morocco",
+    "Mali"
+   ],
+   "lat": 28.0,
+   "lng": 2.6,
+   "zoom": 3.5
+  },
+  {
+   "front": "Which country is marked?",
+   "back": "Libya",
+   "kind": "map",
+   "choices": [
+    "Egypt",
+    "Algeria",
+    "Chad"
+   ],
+   "lat": 27.0,
+   "lng": 17.0,
+   "zoom": 3.5
+  },
+  {
+   "front": "Which country is marked?",
+   "back": "Mali",
+   "kind": "map",
+   "choices": [
+    "Niger",
+    "Mauritania",
+    "Burkina Faso"
+   ],
+   "lat": 17.6,
+   "lng": -4.0,
+   "zoom": 4
+  },
+  {
+   "front": "Which country is marked?",
+   "back": "Niger",
+   "kind": "map",
+   "choices": [
+    "Chad",
+    "Mali",
+    "Nigeria"
+   ],
+   "lat": 17.6,
+   "lng": 8.1,
+   "zoom": 4
+  },
+  {
+   "front": "Which country is marked?",
+   "back": "Chad",
+   "kind": "map",
+   "choices": [
+    "Niger",
+    "Sudan",
+    "Central African Republic"
+   ],
+   "lat": 15.5,
+   "lng": 18.7,
+   "zoom": 4
+  },
+  {
+   "front": "Which country is marked?",
+   "back": "Sudan",
+   "kind": "map",
+   "choices": [
+    "South Sudan",
+    "Chad",
+    "Egypt"
+   ],
+   "lat": 15.5,
+   "lng": 30.0,
+   "zoom": 4
+  },
+  {
+   "front": "Which country is marked?",
+   "back": "Ethiopia",
+   "kind": "map",
+   "choices": [
+    "Somalia",
+    "Kenya",
+    "South Sudan"
+   ],
+   "lat": 9.1,
+   "lng": 40.5,
+   "zoom": 4
+  },
+  {
+   "front": "Which country is marked?",
+   "back": "Kenya",
+   "kind": "map",
+   "choices": [
+    "Tanzania",
+    "Uganda",
+    "Ethiopia"
+   ],
+   "lat": 0.2,
+   "lng": 37.9,
+   "zoom": 4.5
+  },
+  {
+   "front": "Which country is marked?",
+   "back": "Tanzania",
+   "kind": "map",
+   "choices": [
+    "Kenya",
+    "Mozambique",
+    "Zambia"
+   ],
+   "lat": -6.4,
+   "lng": 34.9,
+   "zoom": 4.5
+  },
+  {
+   "front": "Which country is marked?",
+   "back": "Angola",
+   "kind": "map",
+   "choices": [
+    "Zambia",
+    "Namibia",
+    "DR Congo"
+   ],
+   "lat": -12.3,
+   "lng": 17.5,
+   "zoom": 4
+  },
+  {
+   "front": "Which country is marked?",
+   "back": "Namibia",
+   "kind": "map",
+   "choices": [
+    "Botswana",
+    "Angola",
+    "South Africa"
+   ],
+   "lat": -22.6,
+   "lng": 17.1,
+   "zoom": 4
+  },
+  {
+   "front": "Which country is marked?",
+   "back": "Botswana",
+   "kind": "map",
+   "choices": [
+    "Namibia",
+    "Zimbabwe",
+    "South Africa"
+   ],
+   "lat": -22.3,
+   "lng": 24.7,
+   "zoom": 4.5
+  },
+  {
+   "front": "Which country is marked?",
+   "back": "Madagascar",
+   "kind": "map",
+   "choices": [
+    "Mozambique",
+    "Mauritius",
+    "Comoros"
+   ],
+   "lat": -19.4,
+   "lng": 46.7,
+   "zoom": 4
+  },
+  {
+   "front": "Which country is marked?",
+   "back": "Bolivia",
+   "kind": "map",
+   "choices": [
+    "Paraguay",
+    "Peru",
+    "Brazil"
+   ],
+   "lat": -16.5,
+   "lng": -64.7,
+   "zoom": 4
+  },
+  {
+   "front": "Which country is marked?",
+   "back": "Paraguay",
+   "kind": "map",
+   "choices": [
+    "Bolivia",
+    "Uruguay",
+    "Argentina"
+   ],
+   "lat": -23.4,
+   "lng": -58.4,
+   "zoom": 4.5
+  },
+  {
+   "front": "Which country is marked?",
+   "back": "Ecuador",
+   "kind": "map",
+   "choices": [
+    "Colombia",
+    "Peru",
+    "Venezuela"
+   ],
+   "lat": -1.5,
+   "lng": -78.2,
+   "zoom": 5
+  },
+  {
+   "front": "Which country is marked?",
+   "back": "Peru",
+   "kind": "map",
+   "choices": [
+    "Bolivia",
+    "Ecuador",
+    "Colombia"
+   ],
+   "lat": -9.2,
+   "lng": -75.0,
+   "zoom": 4
+  },
+  {
+   "front": "Which country is marked?",
+   "back": "Guyana",
+   "kind": "map",
+   "choices": [
+    "Suriname",
+    "Venezuela",
+    "Brazil"
+   ],
+   "lat": 5.0,
+   "lng": -58.9,
+   "zoom": 5
+  },
+  {
+   "front": "Which country is marked?",
+   "back": "Honduras",
+   "kind": "map",
+   "choices": [
+    "Nicaragua",
+    "Guatemala",
+    "El Salvador"
+   ],
+   "lat": 14.8,
+   "lng": -86.6,
+   "zoom": 5.5
+  },
+  {
+   "front": "Which country is marked?",
+   "back": "Nicaragua",
+   "kind": "map",
+   "choices": [
+    "Honduras",
+    "Costa Rica",
+    "Panama"
+   ],
+   "lat": 12.9,
+   "lng": -85.2,
+   "zoom": 5.5
+  },
+  {
+   "front": "Which country is marked?",
+   "back": "Papua New Guinea",
+   "kind": "map",
+   "choices": [
+    "Indonesia",
+    "Solomon Islands",
+    "Australia"
+   ],
+   "lat": -6.3,
+   "lng": 144.0,
+   "zoom": 4.5
+  }
+ ]
+}

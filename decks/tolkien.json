@@ -1,0 +1,422 @@
+{
+ "id": "tolkien",
+ "name": "Tolkien: Lord of the Rings & the Silmarillion",
+ "description": "From the First Age to the War of the Ring.",
+ "cards": [
+  {
+   "front": "Gandalf's name in Valinor, as a Maia",
+   "back": "Olórin",
+   "kind": "choice",
+   "choices": [
+    "Mithrandir",
+    "Curumo",
+    "Aiwendil"
+   ]
+  },
+  {
+   "front": "Sauron's original name",
+   "back": "Mairon",
+   "kind": "choice",
+   "choices": [
+    "Gorthaur",
+    "Annatar",
+    "Melkor"
+   ]
+  },
+  {
+   "front": "Name Sauron used in disguise to teach the Elven-smiths of Eregion",
+   "back": "Annatar (Lord of Gifts)",
+   "kind": "choice",
+   "choices": [
+    "Mairon",
+    "Thû",
+    "Zigûr"
+   ]
+  },
+  {
+   "front": "Saruman's original Maia name",
+   "back": "Curumo (Curunír among the Elves)",
+   "kind": "basic"
+  },
+  {
+   "front": "Radagast's original Maia name",
+   "back": "Aiwendil",
+   "kind": "choice",
+   "choices": [
+    "Olórin",
+    "Pallando",
+    "Alatar"
+   ]
+  },
+  {
+   "front": "The two Blue Wizards",
+   "back": "Alatar and Pallando",
+   "kind": "basic"
+  },
+  {
+   "front": "Who made the Silmarils?",
+   "back": "Fëanor",
+   "kind": "choice",
+   "choices": [
+    "Celebrimbor",
+    "Fingolfin",
+    "Aulë"
+   ]
+  },
+  {
+   "front": "The Two Trees of Valinor",
+   "back": "Telperion (silver) and Laurelin (gold)",
+   "kind": "basic"
+  },
+  {
+   "front": "Who destroyed the Two Trees?",
+   "back": "Melkor and Ungoliant",
+   "kind": "basic"
+  },
+  {
+   "front": "Which Vala sang the Two Trees into being?",
+   "back": "Yavanna",
+   "kind": "choice",
+   "choices": [
+    "Varda",
+    "Manwë",
+    "Nienna"
+   ]
+  },
+  {
+   "front": "Varda's name among the Elves of Middle-earth",
+   "back": "Elbereth (Gilthoniel)",
+   "kind": "basic"
+  },
+  {
+   "front": "Vala of the waters",
+   "back": "Ulmo",
+   "kind": "choice",
+   "choices": [
+    "Ossë",
+    "Manwë",
+    "Aulë"
+   ]
+  },
+  {
+   "front": "Who created the Dwarves?",
+   "back": "Aulë",
+   "kind": "choice",
+   "choices": [
+    "Yavanna",
+    "Eru",
+    "Manwë"
+   ]
+  },
+  {
+   "front": "Kinslaying at Alqualondë: who attacked whom?",
+   "back": "Fëanor's Noldor attacked the Teleri to take their ships",
+   "kind": "basic"
+  },
+  {
+   "front": "How many sons did Fëanor have?",
+   "back": "Seven",
+   "kind": "choice",
+   "choices": [
+    "Five",
+    "Three",
+    "Nine"
+   ]
+  },
+  {
+   "front": "Morgoth's great fortress in the north",
+   "back": "Angband, beneath Thangorodrim",
+   "kind": "basic"
+  },
+  {
+   "front": "Who fought Morgoth in single combat and wounded him seven times?",
+   "back": "Fingolfin",
+   "kind": "choice",
+   "choices": [
+    "Fingon",
+    "Maedhros",
+    "Turgon"
+   ]
+  },
+  {
+   "front": "Dagor Bragollach means…",
+   "back": "The Battle of Sudden Flame",
+   "kind": "choice",
+   "choices": [
+    "The Battle of Unnumbered Tears",
+    "The War of Wrath",
+    "The Glorious Battle"
+   ]
+  },
+  {
+   "front": "Nirnaeth Arnoediad means…",
+   "back": "The Battle of Unnumbered Tears",
+   "kind": "basic"
+  },
+  {
+   "front": "Kingdom of Thingol and Melian",
+   "back": "Doriath, protected by the Girdle of Melian",
+   "kind": "basic"
+  },
+  {
+   "front": "Lúthien's mother",
+   "back": "Melian the Maia",
+   "kind": "choice",
+   "choices": [
+    "Galadriel",
+    "Idril",
+    "Nienna"
+   ]
+  },
+  {
+   "front": "Who cut a Silmaril from Morgoth's crown?",
+   "back": "Beren (with Lúthien)",
+   "kind": "basic"
+  },
+  {
+   "front": "The wolf that bit off Beren's hand",
+   "back": "Carcharoth",
+   "kind": "choice",
+   "choices": [
+    "Draugluin",
+    "Huan",
+    "Glaurung"
+   ]
+  },
+  {
+   "front": "The Hound of Valinor who aided Beren and Lúthien",
+   "back": "Huan",
+   "kind": "choice",
+   "choices": [
+    "Carcharoth",
+    "Draugluin",
+    "Garm"
+   ]
+  },
+  {
+   "front": "Who founded Nargothrond?",
+   "back": "Finrod Felagund",
+   "kind": "choice",
+   "choices": [
+    "Turgon",
+    "Thingol",
+    "Orodreth"
+   ]
+  },
+  {
+   "front": "Who founded Gondolin?",
+   "back": "Turgon",
+   "kind": "choice",
+   "choices": [
+    "Finrod",
+    "Fingolfin",
+    "Ecthelion"
+   ]
+  },
+  {
+   "front": "Who betrayed Gondolin?",
+   "back": "Maeglin",
+   "kind": "choice",
+   "choices": [
+    "Saeros",
+    "Mîm",
+    "Eöl"
+   ]
+  },
+  {
+   "front": "Which Elf of Gondolin killed Gothmog, Lord of Balrogs?",
+   "back": "Ecthelion of the Fountain",
+   "kind": "choice",
+   "choices": [
+    "Glorfindel",
+    "Tuor",
+    "Fingon"
+   ]
+  },
+  {
+   "front": "Glorfindel died killing a Balrog during the fall of which city?",
+   "back": "Gondolin",
+   "kind": "basic"
+  },
+  {
+   "front": "Túrin's black sword",
+   "back": "Gurthang (Anglachel reforged)",
+   "kind": "choice",
+   "choices": [
+    "Narsil",
+    "Aranrúth",
+    "Anguirel"
+   ]
+  },
+  {
+   "front": "The dragon Túrin slew",
+   "back": "Glaurung",
+   "kind": "choice",
+   "choices": [
+    "Ancalagon",
+    "Smaug",
+    "Scatha"
+   ]
+  },
+  {
+   "front": "Greatest of the winged dragons, slain by Eärendil",
+   "back": "Ancalagon the Black",
+   "kind": "basic"
+  },
+  {
+   "front": "Eärendil's ship",
+   "back": "Vingilótë",
+   "kind": "choice",
+   "choices": [
+    "Alcarondas",
+    "Eärrámë",
+    "Lindar"
+   ]
+  },
+  {
+   "front": "Elrond's twin brother, first King of Númenor",
+   "back": "Elros (Tar-Minyatur)",
+   "kind": "basic"
+  },
+  {
+   "front": "Last king of Númenor, who sailed against Valinor",
+   "back": "Ar-Pharazôn",
+   "kind": "choice",
+   "choices": [
+    "Tar-Palantir",
+    "Ar-Adûnakhôr",
+    "Elendil"
+   ]
+  },
+  {
+   "front": "Elendil's sons",
+   "back": "Isildur and Anárion",
+   "kind": "basic"
+  },
+  {
+   "front": "Gil-galad's spear",
+   "back": "Aeglos",
+   "kind": "choice",
+   "choices": [
+    "Narsil",
+    "Anglachel",
+    "Dramborleg"
+   ]
+  },
+  {
+   "front": "Who forged the Three Elven Rings?",
+   "back": "Celebrimbor",
+   "kind": "choice",
+   "choices": [
+    "Fëanor",
+    "Sauron",
+    "Telchar"
+   ]
+  },
+  {
+   "front": "Who gave Narya, the Ring of Fire, to Gandalf?",
+   "back": "Círdan the Shipwright",
+   "kind": "choice",
+   "choices": [
+    "Elrond",
+    "Galadriel",
+    "Celebrimbor"
+   ]
+  },
+  {
+   "front": "Which Elven ring did Galadriel bear?",
+   "back": "Nenya (Ring of Water)",
+   "kind": "choice",
+   "choices": [
+    "Vilya",
+    "Narya",
+    "None"
+   ]
+  },
+  {
+   "front": "Which Elven ring did Elrond bear?",
+   "back": "Vilya (Ring of Air)",
+   "kind": "choice",
+   "choices": [
+    "Nenya",
+    "Narya",
+    "None"
+   ]
+  },
+  {
+   "front": "Aragorn's name when serving Gondor and Rohan in disguise",
+   "back": "Thorongil",
+   "kind": "choice",
+   "choices": [
+    "Strider",
+    "Estel",
+    "Elessar"
+   ]
+  },
+  {
+   "front": "Aragorn's childhood name in Rivendell",
+   "back": "Estel ('hope')",
+   "kind": "basic"
+  },
+  {
+   "front": "Arwen's mother",
+   "back": "Celebrían",
+   "kind": "choice",
+   "choices": [
+    "Galadriel",
+    "Idril",
+    "Nimrodel"
+   ]
+  },
+  {
+   "front": "Who found the One Ring in the Anduin?",
+   "back": "Déagol",
+   "kind": "choice",
+   "choices": [
+    "Sméagol",
+    "Isildur",
+    "Bilbo"
+   ]
+  },
+  {
+   "front": "The three kinds of Hobbits",
+   "back": "Harfoots, Stoors and Fallohides",
+   "kind": "basic"
+  },
+  {
+   "front": "The tree that trapped Merry and Pippin in the Old Forest",
+   "back": "Old Man Willow",
+   "kind": "basic"
+  },
+  {
+   "front": "Who killed Saruman?",
+   "back": "Gríma Wormtongue",
+   "kind": "choice",
+   "choices": [
+    "Legolas",
+    "Treebeard",
+    "Frodo"
+   ]
+  },
+  {
+   "front": "Whose blade, taken from the Barrow-downs, let Éowyn's stroke kill the Witch-king?",
+   "back": "Merry's",
+   "kind": "basic"
+  },
+  {
+   "front": "Théoden's horse",
+   "back": "Snowmane",
+   "kind": "choice",
+   "choices": [
+    "Hasufel",
+    "Arod",
+    "Firefoot"
+   ]
+  },
+  {
+   "front": "Mount Doom's two Sindarin names",
+   "back": "Orodruin and Amon Amarth",
+   "kind": "basic"
+  }
+ ]
+}

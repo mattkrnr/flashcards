@@ -1,0 +1,497 @@
+{
+ "id": "geo-continents",
+ "name": "Geography: which continent?",
+ "description": "Multiple choice. Countries people often get wrong.",
+ "cards": [
+  {
+   "front": "Which continent is Suriname in?",
+   "back": "South America",
+   "kind": "choice",
+   "choices": [
+    "North America",
+    "Africa",
+    "Oceania"
+   ]
+  },
+  {
+   "front": "Which continent is Guyana in?",
+   "back": "South America",
+   "kind": "choice",
+   "choices": [
+    "North America",
+    "Africa",
+    "Oceania"
+   ]
+  },
+  {
+   "front": "Which continent is Paraguay in?",
+   "back": "South America",
+   "kind": "choice",
+   "choices": [
+    "North America",
+    "Africa",
+    "Oceania"
+   ]
+  },
+  {
+   "front": "Which continent is Uruguay in?",
+   "back": "South America",
+   "kind": "choice",
+   "choices": [
+    "North America",
+    "Africa",
+    "Oceania"
+   ]
+  },
+  {
+   "front": "Which continent is Belize in?",
+   "back": "North America",
+   "kind": "choice",
+   "choices": [
+    "South America",
+    "Europe",
+    "Oceania"
+   ]
+  },
+  {
+   "front": "Which continent is Honduras in?",
+   "back": "North America",
+   "kind": "choice",
+   "choices": [
+    "South America",
+    "Europe",
+    "Oceania"
+   ]
+  },
+  {
+   "front": "Which continent is Nicaragua in?",
+   "back": "North America",
+   "kind": "choice",
+   "choices": [
+    "South America",
+    "Europe",
+    "Oceania"
+   ]
+  },
+  {
+   "front": "Which continent is Barbados in?",
+   "back": "North America",
+   "kind": "choice",
+   "choices": [
+    "South America",
+    "Europe",
+    "Oceania"
+   ]
+  },
+  {
+   "front": "Which continent is Dominica in?",
+   "back": "North America",
+   "kind": "choice",
+   "choices": [
+    "South America",
+    "Europe",
+    "Oceania"
+   ]
+  },
+  {
+   "front": "Which continent is Grenada in?",
+   "back": "North America",
+   "kind": "choice",
+   "choices": [
+    "South America",
+    "Europe",
+    "Oceania"
+   ]
+  },
+  {
+   "front": "Which continent is Panama in?",
+   "back": "North America",
+   "kind": "choice",
+   "choices": [
+    "South America",
+    "Europe",
+    "Oceania"
+   ]
+  },
+  {
+   "front": "Which continent is Bhutan in?",
+   "back": "Asia",
+   "kind": "choice",
+   "choices": [
+    "Africa",
+    "Oceania",
+    "Europe"
+   ]
+  },
+  {
+   "front": "Which continent is Laos in?",
+   "back": "Asia",
+   "kind": "choice",
+   "choices": [
+    "Africa",
+    "Oceania",
+    "Europe"
+   ]
+  },
+  {
+   "front": "Which continent is Brunei in?",
+   "back": "Asia",
+   "kind": "choice",
+   "choices": [
+    "Africa",
+    "Oceania",
+    "Europe"
+   ]
+  },
+  {
+   "front": "Which continent is Maldives in?",
+   "back": "Asia",
+   "kind": "choice",
+   "choices": [
+    "Africa",
+    "Oceania",
+    "Europe"
+   ]
+  },
+  {
+   "front": "Which continent is Kyrgyzstan in?",
+   "back": "Asia",
+   "kind": "choice",
+   "choices": [
+    "Africa",
+    "Oceania",
+    "Europe"
+   ]
+  },
+  {
+   "front": "Which continent is Tajikistan in?",
+   "back": "Asia",
+   "kind": "choice",
+   "choices": [
+    "Africa",
+    "Oceania",
+    "Europe"
+   ]
+  },
+  {
+   "front": "Which continent is Turkmenistan in?",
+   "back": "Asia",
+   "kind": "choice",
+   "choices": [
+    "Africa",
+    "Oceania",
+    "Europe"
+   ]
+  },
+  {
+   "front": "Which continent is Bahrain in?",
+   "back": "Asia",
+   "kind": "choice",
+   "choices": [
+    "Africa",
+    "Oceania",
+    "Europe"
+   ]
+  },
+  {
+   "front": "Which continent is Oman in?",
+   "back": "Asia",
+   "kind": "choice",
+   "choices": [
+    "Africa",
+    "Oceania",
+    "Europe"
+   ]
+  },
+  {
+   "front": "Which continent is Jordan in?",
+   "back": "Asia",
+   "kind": "choice",
+   "choices": [
+    "Africa",
+    "Oceania",
+    "Europe"
+   ]
+  },
+  {
+   "front": "Which continent is Eritrea in?",
+   "back": "Africa",
+   "kind": "choice",
+   "choices": [
+    "Asia",
+    "Oceania",
+    "South America"
+   ]
+  },
+  {
+   "front": "Which continent is Djibouti in?",
+   "back": "Africa",
+   "kind": "choice",
+   "choices": [
+    "Asia",
+    "Oceania",
+    "South America"
+   ]
+  },
+  {
+   "front": "Which continent is Burkina Faso in?",
+   "back": "Africa",
+   "kind": "choice",
+   "choices": [
+    "Asia",
+    "Oceania",
+    "South America"
+   ]
+  },
+  {
+   "front": "Which continent is Benin in?",
+   "back": "Africa",
+   "kind": "choice",
+   "choices": [
+    "Asia",
+    "Oceania",
+    "South America"
+   ]
+  },
+  {
+   "front": "Which continent is Togo in?",
+   "back": "Africa",
+   "kind": "choice",
+   "choices": [
+    "Asia",
+    "Oceania",
+    "South America"
+   ]
+  },
+  {
+   "front": "Which continent is Lesotho in?",
+   "back": "Africa",
+   "kind": "choice",
+   "choices": [
+    "Asia",
+    "Oceania",
+    "South America"
+   ]
+  },
+  {
+   "front": "Which continent is Eswatini in?",
+   "back": "Africa",
+   "kind": "choice",
+   "choices": [
+    "Asia",
+    "Oceania",
+    "South America"
+   ]
+  },
+  {
+   "front": "Which continent is Malawi in?",
+   "back": "Africa",
+   "kind": "choice",
+   "choices": [
+    "Asia",
+    "Oceania",
+    "South America"
+   ]
+  },
+  {
+   "front": "Which continent is Mauritius in?",
+   "back": "Africa",
+   "kind": "choice",
+   "choices": [
+    "Asia",
+    "Oceania",
+    "South America"
+   ]
+  },
+  {
+   "front": "Which continent is Seychelles in?",
+   "back": "Africa",
+   "kind": "choice",
+   "choices": [
+    "Asia",
+    "Oceania",
+    "South America"
+   ]
+  },
+  {
+   "front": "Which continent is Comoros in?",
+   "back": "Africa",
+   "kind": "choice",
+   "choices": [
+    "Asia",
+    "Oceania",
+    "South America"
+   ]
+  },
+  {
+   "front": "Which continent is Cape Verde in?",
+   "back": "Africa",
+   "kind": "choice",
+   "choices": [
+    "Asia",
+    "Oceania",
+    "South America"
+   ]
+  },
+  {
+   "front": "Which continent is São Tomé and Príncipe in?",
+   "back": "Africa",
+   "kind": "choice",
+   "choices": [
+    "Asia",
+    "Oceania",
+    "South America"
+   ]
+  },
+  {
+   "front": "Which continent is Gabon in?",
+   "back": "Africa",
+   "kind": "choice",
+   "choices": [
+    "Asia",
+    "Oceania",
+    "South America"
+   ]
+  },
+  {
+   "front": "Which continent is Moldova in?",
+   "back": "Europe",
+   "kind": "choice",
+   "choices": [
+    "Asia",
+    "Africa",
+    "North America"
+   ]
+  },
+  {
+   "front": "Which continent is North Macedonia in?",
+   "back": "Europe",
+   "kind": "choice",
+   "choices": [
+    "Asia",
+    "Africa",
+    "North America"
+   ]
+  },
+  {
+   "front": "Which continent is Montenegro in?",
+   "back": "Europe",
+   "kind": "choice",
+   "choices": [
+    "Asia",
+    "Africa",
+    "North America"
+   ]
+  },
+  {
+   "front": "Which continent is Liechtenstein in?",
+   "back": "Europe",
+   "kind": "choice",
+   "choices": [
+    "Asia",
+    "Africa",
+    "North America"
+   ]
+  },
+  {
+   "front": "Which continent is Andorra in?",
+   "back": "Europe",
+   "kind": "choice",
+   "choices": [
+    "Asia",
+    "Africa",
+    "North America"
+   ]
+  },
+  {
+   "front": "Which continent is San Marino in?",
+   "back": "Europe",
+   "kind": "choice",
+   "choices": [
+    "Asia",
+    "Africa",
+    "North America"
+   ]
+  },
+  {
+   "front": "Which continent is Slovenia in?",
+   "back": "Europe",
+   "kind": "choice",
+   "choices": [
+    "Asia",
+    "Africa",
+    "North America"
+   ]
+  },
+  {
+   "front": "Which continent is Latvia in?",
+   "back": "Europe",
+   "kind": "choice",
+   "choices": [
+    "Asia",
+    "Africa",
+    "North America"
+   ]
+  },
+  {
+   "front": "Which continent is Vanuatu in?",
+   "back": "Oceania",
+   "kind": "choice",
+   "choices": [
+    "Asia",
+    "Africa",
+    "South America"
+   ]
+  },
+  {
+   "front": "Which continent is Palau in?",
+   "back": "Oceania",
+   "kind": "choice",
+   "choices": [
+    "Asia",
+    "Africa",
+    "South America"
+   ]
+  },
+  {
+   "front": "Which continent is Nauru in?",
+   "back": "Oceania",
+   "kind": "choice",
+   "choices": [
+    "Asia",
+    "Africa",
+    "South America"
+   ]
+  },
+  {
+   "front": "Which continent is Kiribati in?",
+   "back": "Oceania",
+   "kind": "choice",
+   "choices": [
+    "Asia",
+    "Africa",
+    "South America"
+   ]
+  },
+  {
+   "front": "Which continent is Tonga in?",
+   "back": "Oceania",
+   "kind": "choice",
+   "choices": [
+    "Asia",
+    "Africa",
+    "South America"
+   ]
+  },
+  {
+   "front": "Which continent is Samoa in?",
+   "back": "Oceania",
+   "kind": "choice",
+   "choices": [
+    "Asia",
+    "Africa",
+    "South America"
+   ]
+  }
+ ]
+}
