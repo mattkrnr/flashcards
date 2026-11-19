@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Cards">
+<meta name="theme-color" content="#f6f7fb">
+<title>Flashcards</title>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<style>
+  :root { --bg:#f6f7fb; --card:#fff; --ink:#1b1d24; --muted:#6f7482; --line:#e3e5ec; --accent:#4a55c9; --accent-soft:#e7e9fb; --again:#c2453d; --hard:#c98a1b; --good:#2f8a57; --easy:#4a55c9; }
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--bg); color:var(--ink); font:16px/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+  main { max-width:640px; margin:0 auto; padding:calc(16px + env(safe-area-inset-top)) 16px 48px; }
+  header { display:flex; align-items:center; justify-content:space-between; margin-bottom:16px; gap:8px; }
+  h1 { font-size:26px; margin:0; letter-spacing:-.02em; }
+  h2 { font-size:18px; margin:0 0 10px; }
+  .muted { color:var(--muted); font-size:14px; }
+  .card { background:var(--card); border:1px solid var(--line); border-radius:14px; padding:16px; margin-bottom:12px; }
+  input, textarea { width:100%; font:inherit; color:inherit; background:#fff; border:1px solid var(--line); border-radius:10px; padding:10px 12px; }
+  textarea { min-height:120px; resize:vertical; }
+  button { font:inherit; border:0; border-radius:10px; padding:10px 16px; background:var(--accent); color:#fff; cursor:pointer; }
+  button.ghost { background:transparent; color:var(--accent); padding:6px 8px; }
+  button.danger { color:var(--again); }
+  button:disabled { opacity:.5; }
+  .row { display:flex; gap:10px; align-items:center; flex-wrap:wrap; }
+  .row > input { flex:1; }
+  .deck { display:flex; align-items:center; justify-content:space-between; gap:10px; cursor:pointer; }
+  .deck b { font-size:17px; }
+  .due { background:var(--accent-soft); color:var(--accent); border-radius:999px; padding:2px 10px; font-size:14px; font-weight:600; white-space:nowrap; }
+  .due.zero { background:var(--bg); color:var(--muted); font-weight:400; }
+  .study-card { min-height:260px; display:flex; flex-direction:column; justify-content:center; text-align:center; font-size:22px; cursor:pointer; }
+  .study-card .back { border-top:1px dashed var(--line); margin-top:18px; padding-top:18px; color:var(--accent); }
+  .grades { display:grid; grid-template-columns:repeat(4,1fr); gap:8px; }
+  .grades button { padding:12px 4px; font-size:15px; }
+  .grades small { display:block; opacity:.8; font-size:12px; }
+  .g1 { background:var(--again); } .g3 { background:var(--hard); } .g4 { background:var(--good); } .g5 { background:var(--easy); }
+  .progress { height:4px; background:var(--line); border-radius:4px; overflow:hidden; margin-bottom:12px; }
+  .progress div { height:100%; background:var(--accent); transition:width .2s; }
+  .cardrow { display:flex; justify-content:space-between; gap:10px; border-bottom:1px solid var(--line); padding:8px 0; font-size:15px; }
+  .cardrow:last-child { border-bottom:0; }
+  .hidden { display:none !important; }
+  .toast { position:fixed; left:50%; bottom:24px; transform:translateX(-50%); background:var(--ink); color:#fff; padding:8px 16px; border-radius:999px; font-size:14px; }
+</style>
+</head>
+<body>
+<main>
+  <header><h1><a id="home-link" href="/" class="hidden" style="color:inherit; text-decoration:none; margin-right:6px" aria-label="All apps">←</a><span id="title">Flashcards</span></h1><span><button id="back" class="ghost hidden">← Decks</button><button id="signout" class="ghost hidden">Sign out</button></span></header>
+
+  <section id="auth" class="card hidden">
+    <button id="google" style="width:100%; margin-bottom:12px">Continue with Google</button>
+    <p class="muted" style="margin:0 0 8px">Or sign in with an email code:</p>
+    <div class="row"><input id="email" type="email" placeholder="you@email.com" autocomplete="email"><button id="send">Send code</button></div>
+    <div id="step-code" class="row hidden" style="margin-top:10px"><input id="code" inputmode="numeric" placeholder="6-digit code" autocomplete="one-time-code"><button id="verify">Sign in</button></div>
+    <p id="auth-msg" class="muted"></p>
+  </section>
+
+  <!-- Deck list -->
+  <section id="home" class="hidden">
+    <button id="study-all" style="width:100%; margin-bottom:14px">Study all due cards</button>
+    <div id="decks"></div>
+    <div class="card">
+      <h2>New deck</h2>
+      <div class="row"><input id="deck-name" placeholder="e.g. World capitals, Spanish, US presidents"><button id="add-deck">Create</button></div>
+      <p class="muted" style="margin-bottom:0">Tip: ask Claude to make a deck for you. It can add cards straight to your account.</p>
+    </div>
+  </section>
+
+  <!-- One deck -->
+  <section id="deck" class="hidden">
+    <button id="study-deck" style="width:100%; margin-bottom:14px">Study</button>
+    <div class="card">
+      <h2>Add cards</h2>
+      <p class="muted" style="margin-top:0">One per line: <code>front | back</code> (tabs from a spreadsheet work too)</p>
+      <textarea id="bulk" placeholder="Capital of Australia | Canberra&#10;Largest planet | Jupiter"></textarea>
+      <div class="row" style="margin-top:10px; justify-content:flex-end"><button id="add-cards">Add</button></div>
+    </div>
+    <div class="card"><h2 id="card-count">Cards</h2><div id="card-list"></div></div>
+    <div class="row" style="justify-content:space-between">
+      <button id="rename-deck" class="ghost">Rename deck</button>
+      <button id="del-deck" class="ghost danger">Delete deck</button>
+    </div>
+  </section>
+
+  <!-- Study -->
+  <section id="study" class="hidden">
+    <div class="progress"><div id="bar" style="width:0"></div></div>
+    <p class="muted" id="study-meta"></p>
+    <div class="card study-card" id="study-card"></div>
+    <div class="grades hidden" id="grades">
+      <button class="g1" data-q="1">Again<small>&lt;1d</small></button>
+      <button class="g3" data-q="3">Hard<small id="i3"></small></button>
+      <button class="g4" data-q="4">Good<small id="i4"></small></button>
+      <button class="g5" data-q="5">Easy<small id="i5"></small></button>
+    </div>
+    <button id="reveal" style="width:100%">Show answer</button>
+  </section>
+</main>
+
+<script>
+const SUPABASE_URL = 'https://bkhhcsmbpnlgsnbzblov.supabase.co';
+const SUPABASE_KEY = 'sb_publishable_JdJa4qMmvvrD96M3fDvbQA_WGQSvzfu';
+const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+// Back arrow to the apps homepage when opened from it
+if (new URLSearchParams(location.search).get('from') === 'home') document.getElementById('home-link').classList.remove('hidden');
+
+const $ = id => document.getElementById(id);
+const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const today = () => new Date().toLocaleDateString('en-CA');
+const addDays = n => { const d = new Date(); d.setDate(d.getDate() + n); return d.toLocaleDateString('en-CA'); };
+const toast = msg => { const t = document.createElement('div'); t.className = 'toast'; t.textContent = msg; document.body.append(t); setTimeout(() => t.remove(), 2200); };
+
+let decks = [], cards = [], currentDeck = null, queue = [], studied = 0, sessionSize = 0, started = false;
+
+// ───────── Auth ─────────
+$('send').onclick = async () => {
+  const email = $('email').value.trim(); if (!email) return;
+  $('send').disabled = true;
+  const { error } = await sb.auth.signInWithOtp({ email, options: { emailRedirectTo: location.href.split('#')[0] } });
+  $('send').disabled = false;
+  if (error) return $('auth-msg').textContent = error.message;
+  $('step-code').classList.remove('hidden');
+  $('auth-msg').textContent = 'Check your email for the code (or tap the link in it).';
+};
+$('verify').onclick = async () => {
+  const { error } = await sb.auth.verifyOtp({ email: $('email').value.trim(), token: $('code').value.trim(), type: 'email' });
+  if (error) $('auth-msg').textContent = error.message;
+};
+$('signout').onclick = () => sb.auth.signOut();
+$('google').onclick = () => sb.auth.signInWithOAuth({ provider: 'google', options: { redirectTo: location.href.split('#')[0] } });
+sb.auth.onAuthStateChange((_e, session) => {
+  $('auth').classList.toggle('hidden', !!session);
+  $('signout').classList.toggle('hidden', !session);
+  if (session && !started) { started = true; setTimeout(loadAll, 0); }
+  if (!session) { started = false; show('none'); }
+});
+sb.auth.getSession().then(({ data }) => { if (!data.session) $('auth').classList.remove('hidden'); });
+
+function show(view) {
+  for (const v of ['home','deck','study']) $(v).classList.toggle('hidden', v !== view);
+  $('back').classList.toggle('hidden', view === 'home' || view === 'none');
+}
+
+// ───────── Data ─────────
+async function loadAll() {
+  const [d, c] = await Promise.all([
+    sb.from('flashcards_decks').select('*').order('created_at'),
+    sb.from('flashcards_cards').select('*').order('created_at'),
+  ]);
+  if (d.error || c.error) return toast((d.error || c.error).message);
+  decks = d.data; cards = c.data;
+  if (currentDeck && !decks.find(x => x.id === currentDeck.id)) currentDeck = null;
+  if ($('study').classList.contains('hidden')) currentDeck ? openDeck(currentDeck.id) : renderHome();
+}
+const dueIn = deckId => cards.filter(c => (!deckId || c.deck_id === deckId) && c.due <= today());
+
+// ───────── Home ─────────
+function renderHome() {
+  currentDeck = null; $('title').textContent = 'Flashcards'; show('home');
+  const allDue = dueIn().length;
+  $('study-all').textContent = allDue ? `Study all due (${allDue})` : 'Nothing due — nice';
+  $('study-all').disabled = !allDue;
+  $('decks').innerHTML = decks.length ? decks.map(d => {
+    const n = cards.filter(c => c.deck_id === d.id).length, due = dueIn(d.id).length;
+    return `<div class="card deck" data-id="${d.id}"><div><b>${esc(d.name)}</b><div class="muted">${n} card${n === 1 ? '' : 's'}</div></div><span class="due ${due ? '' : 'zero'}">${due} due</span></div>`;
+  }).join('') : `<p class="muted">No decks yet. Create one below.</p>`;
+  $('decks').querySelectorAll('.deck').forEach(el => el.onclick = () => openDeck(el.dataset.id));
+}
+$('add-deck').onclick = async () => {
+  const name = $('deck-name').value.trim(); if (!name) return;
+  const { data, error } = await sb.from('flashcards_decks').insert({ name }).select().single();
+  if (error) return toast(error.message);
+  $('deck-name').value = ''; decks.push(data); openDeck(data.id);
+};
+$('back').onclick = renderHome;
+
+// ───────── Deck ─────────
+function openDeck(id) {
+  currentDeck = decks.find(d => d.id === id); if (!currentDeck) return renderHome();
+  $('title').textContent = currentDeck.name; show('deck');
+  const list = cards.filter(c => c.deck_id === id), due = dueIn(id).length;
+  $('study-deck').textContent = due ? `Study (${due} due)` : 'Nothing due — study anyway';
+  $('card-count').textContent = `${list.length} card${list.length === 1 ? '' : 's'}`;
+  $('card-list').innerHTML = list.map(c => `
+    <div class="cardrow"><span><b>${esc(c.front)}</b><br><span class="muted">${esc(c.back)}</span></span>
+    <span style="text-align:right; white-space:nowrap"><span class="muted">${c.due <= today() ? 'due' : 'due ' + c.due.slice(5)}</span><br><button class="ghost danger" data-del="${c.id}">Delete</button></span></div>`).join('') || '<p class="muted">No cards yet.</p>';
+  $('card-list').querySelectorAll('[data-del]').forEach(b => b.onclick = async () => {
+    const { error } = await sb.from('flashcards_cards').delete().eq('id', b.dataset.del);
+    if (error) return toast(error.message);
+    cards = cards.filter(c => c.id !== b.dataset.del); openDeck(id);
+  });
+}
+$('add-cards').onclick = async () => {
+  const rows = $('bulk').value.split('\n').map(line => {
+    const parts = line.includes('\t') ? line.split('\t') : line.split('|');
+    if (parts.length < 2) return null;
+    const front = parts[0].trim(), back = parts.slice(1).join(line.includes('\t') ? ' ' : '|').trim();
+    return front && back ? { deck_id: currentDeck.id, front, back } : null;
+  }).filter(Boolean);
+  if (!rows.length) return toast('Use "front | back", one per line');
+  const { data, error } = await sb.from('flashcards_cards').insert(rows).select();
+  if (error) return toast(error.message);
+  cards = cards.concat(data); $('bulk').value = ''; toast(`Added ${data.length}`); openDeck(currentDeck.id);
+};
+$('rename-deck').onclick = async () => {
+  const name = prompt('Deck name', currentDeck.name); if (!name || name === currentDeck.name) return;
+  const { error } = await sb.from('flashcards_decks').update({ name }).eq('id', currentDeck.id);
+  if (error) return toast(error.message);
+  currentDeck.name = name; openDeck(currentDeck.id);
+};
+$('del-deck').onclick = async () => {
+  if (!confirm(`Delete "${currentDeck.name}" and all its cards?`)) return;
+  const { error } = await sb.from('flashcards_decks').delete().eq('id', currentDeck.id);
+  if (error) return toast(error.message);
+  decks = decks.filter(d => d.id !== currentDeck.id); cards = cards.filter(c => c.deck_id !== currentDeck.id); renderHome();
+};
+
+// ───────── Study (SM-2) ─────────
+function schedule(c, q) {
+  // q: 1 Again, 3 Hard, 4 Good, 5 Easy
+  let { ease, interval_days: iv, reps, lapses } = c;
+  if (q < 3) { reps = 0; lapses++; iv = 0; }
+  else {
+    reps++;
+    if (reps === 1) iv = q === 5 ? 3 : 1;
+    else if (reps === 2) iv = q === 3 ? 3 : q === 5 ? 8 : 6;
+    else iv = Math.max(iv + 1, Math.round(iv * (q === 3 ? 1.2 : ease * (q === 5 ? 1.3 : 1))));
+  }
+  ease = Math.max(1.3, +(ease + 0.1 - (5 - q) * (0.08 + (5 - q) * 0.02)).toFixed(2));
+  return { ease, interval_days: iv, reps, lapses, due: addDays(iv) };
+}
+const label = d => d === 0 ? '<1d' : d < 30 ? `${d}d` : d < 365 ? `${Math.round(d / 30)}mo` : `${(d / 365).toFixed(1)}y`;
+
+function startStudy(deckId, includeNotDue) {
+  let pool = cards.filter(c => !deckId || c.deck_id === deckId);
+  queue = includeNotDue && !pool.some(c => c.due <= today()) ? pool.slice() : pool.filter(c => c.due <= today());
+  queue.sort(() => Math.random() - .5);
+  if (!queue.length) return toast('No cards to study');
+  studied = 0; sessionSize = queue.length;
+  $('title').textContent = deckId ? currentDeck.name : 'All decks'; show('study'); nextCard();
+}
+$('study-all').onclick = () => { currentDeck = null; startStudy(null, false); };
+$('study-deck').onclick = () => startStudy(currentDeck.id, true);
+
+function nextCard() {
+  $('bar').style.width = `${Math.round(studied / Math.max(sessionSize, 1) * 100)}%`;
+  if (!queue.length) {
+    $('study-card').innerHTML = `<div>Done! 🎉<div class="muted" style="font-size:15px; margin-top:8px">${studied} review${studied === 1 ? '' : 's'}</div></div>`;
+    $('grades').classList.add('hidden'); $('reveal').classList.remove('hidden');
+    $('reveal').textContent = 'Back'; $('reveal').onclick = () => { $('reveal').textContent = 'Show answer'; $('reveal').onclick = reveal; currentDeck ? openDeck(currentDeck.id) : renderHome(); };
+    $('study-meta').textContent = ''; return;
+  }
+  const c = queue[0];
+  $('study-meta').textContent = `${queue.length} left${currentDeck ? '' : ' · ' + (decks.find(d => d.id === c.deck_id)?.name || '')}`;
+  $('study-card').innerHTML = `<div>${esc(c.front)}</div>`;
+  $('grades').classList.add('hidden'); $('reveal').classList.remove('hidden');
+}
+function reveal() {
+  const c = queue[0]; if (!c) return;
+  $('study-card').innerHTML = `<div>${esc(c.front)}</div><div class="back">${esc(c.back)}</div>`;
+  for (const q of [3,4,5]) $('i' + q).textContent = label(schedule(c, q).interval_days);
+  $('grades').classList.remove('hidden'); $('reveal').classList.add('hidden');
+}
+$('reveal').onclick = reveal;
+$('study-card').onclick = () => { if (!$('reveal').classList.contains('hidden') && queue.length) reveal(); };
+
+$('grades').querySelectorAll('button').forEach(b => b.onclick = async () => {
+  const c = queue.shift(), q = +b.dataset.q, next = schedule(c, q);
+  Object.assign(c, next);
+  if (q < 3) queue.splice(Math.min(queue.length, 3), 0, c);   // see it again in a few cards
+  else studied++;
+  if (q < 3) sessionSize++;
+  nextCard();
+  const { error } = await sb.from('flashcards_cards').update(next).eq('id', c.id);
+  if (error) toast('Not saved: ' + error.message);
+});
+
+document.addEventListener('keydown', e => {
+  if ($('study').classList.contains('hidden')) return;
+  if (e.key === ' ' && !$('reveal').classList.contains('hidden')) { e.preventDefault(); $('reveal').click(); }
+  const map = { '1': 0, '2': 1, '3': 2, '4': 3 };
+  if (e.key in map && !$('grades').classList.contains('hidden')) $('grades').querySelectorAll('button')[map[e.key]].click();
+});
+</script>
+</body>
+</html>
